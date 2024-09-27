@@ -1,8 +1,6 @@
 "use client"; // Enables client-side rendering for this component
 
 import { useState, useEffect } from "react"; // Import useState and useEffect hooks from React
-import { Button } from "@/components/ui/button"; // Import custom Button component
-import { Card } from "@/components/ui/card"; // Import custom Card component
 import { FilePenIcon, TrashIcon } from "lucide-react"; // Import icons from lucide-react
 
 // Define the Note type
@@ -131,77 +129,73 @@ export default function NotesApp() {
   // JSX return statement rendering the Notes App UI
   return (
     <div className="flex flex-col h-screen bg-[#F3ECE7] text-[#333333]">
-  <header className="bg-[#FDFCFB] p-6 shadow-md">
-    <h1 className="text-3xl font-bold text-center">Note Taker</h1>
-  </header>
-  <main className="flex-1 overflow-auto p-6">
-    <div className="mb-6 max-w-xl mx-auto">
-      {/* Input for note title */}
-      <input
-        type="text"
-        placeholder="Title"
-        value={newNote.title || ""}
-        onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
-        className="w-full h-12 rounded-md border border-[#6D6D6D] bg-[#FAF0E6] px-4 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#8B0000] transition-all"
-      />
-      {/* Textarea for note content */}
-      <textarea
-        placeholder="Content"
-        value={newNote.content || ""}
-        onChange={(e) =>
-          setNewNote({ ...newNote, content: e.target.value })
-        }
-        className="mt-4 w-full h-32 rounded-md border border-[#6D6D6D] bg-[#FAF0E6] px-4 py-2 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#8B0000] transition-all"
-      />
-      {/* Button to add or update note */}
-      {editingNoteId === null ? (
-        <button
-          onClick={handleAddNote}
-          className="mt-4 w-full h-12 bg-[#8B0000] text-white rounded-md hover:bg-[#A52A2A] transition-all focus:outline-none"
-        >
-          Add Note
-        </button>
-      ) : (
-        <button
-          onClick={handleUpdateNote}
-          className="mt-4 w-full h-12 bg-[#8B0000] text-white rounded-md hover:bg-[#A52A2A] transition-all focus:outline-none"
-        >
-          Update Note
-        </button>
-      )}
-    </div>
-
-    {/* Display list of notes */}
-    <div className="grid gap-6 max-w-xl mx-auto">
-      {notes.map((note) => (
-        <div
-          key={note.id}
-          className="p-6 bg-[#FDFCFB] shadow-lg rounded-md border border-[#E0E0E0] hover:shadow-xl transition-all"
-        >
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">{note.title}</h2>
-            <div className="flex space-x-2">
-              <button
-                className="bg-transparent hover:bg-[#F3ECE7] p-2 rounded-md focus:outline-none"
-                onClick={() => handleEditNote(note.id)}
-              >
-                <FilePenIcon className="h-5 w-5 text-[#6D6D6D]" />
-              </button>
-              <button
-                className="bg-transparent hover:bg-[#F3ECE7] p-2 rounded-md focus:outline-none"
-                onClick={() => handleDeleteNote(note.id)}
-              >
-                <TrashIcon className="h-5 w-5 text-[#6D6D6D]" />
-              </button>
-            </div>
-          </div>
-          <p className="mt-3 text-[#495057]">{note.content}</p>
+      <header className="bg-[#FDFCFB] p-6 shadow-md">
+        <h1 className="text-3xl font-bold text-center">Note Taker</h1>
+      </header>
+      <main className="flex-1 overflow-auto p-6">
+        <div className="mb-6 max-w-xl mx-auto">
+          {/* Input for note title */}
+          <input
+            type="text"
+            placeholder="Title"
+            value={newNote.title || ""}
+            onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
+            className="w-full h-12 rounded-md border border-[#6D6D6D] bg-[#FAF0E6] px-4 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#8B0000] transition-all"
+          />
+          {/* Textarea for note content */}
+          <textarea
+            placeholder="Content"
+            value={newNote.content || ""}
+            onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
+            className="mt-4 w-full h-32 rounded-md border border-[#6D6D6D] bg-[#FAF0E6] px-4 py-2 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#8B0000] transition-all"
+          />
+          {/* Button to add or update note */}
+          {editingNoteId === null ? (
+            <button
+              onClick={handleAddNote}
+              className="mt-4 w-full h-12 bg-[#8B0000] text-white rounded-md hover:bg-[#A52A2A] transition-all focus:outline-none"
+            >
+              Add Note
+            </button>
+          ) : (
+            <button
+              onClick={handleUpdateNote}
+              className="mt-4 w-full h-12 bg-[#8B0000] text-white rounded-md hover:bg-[#A52A2A] transition-all focus:outline-none"
+            >
+              Update Note
+            </button>
+          )}
         </div>
-      ))}
+
+        {/* Display list of notes */}
+        <div className="grid gap-6 max-w-xl mx-auto">
+          {notes.map((note) => (
+            <div
+              key={note.id}
+              className="p-6 bg-[#FDFCFB] shadow-lg rounded-md border border-[#E0E0E0] hover:shadow-xl transition-all"
+            >
+              <div className="flex justify-between items-center">
+                <h2 className="text-lg font-semibold">{note.title}</h2>
+                <div className="flex space-x-2">
+                  <button
+                    className="bg-transparent hover:bg-[#F3ECE7] p-2 rounded-md focus:outline-none"
+                    onClick={() => handleEditNote(note.id)}
+                  >
+                    <FilePenIcon className="h-5 w-5 text-[#6D6D6D]" />
+                  </button>
+                  <button
+                    className="bg-transparent hover:bg-[#F3ECE7] p-2 rounded-md focus:outline-none"
+                    onClick={() => handleDeleteNote(note.id)}
+                  >
+                    <TrashIcon className="h-5 w-5 text-[#6D6D6D]" />
+                  </button>
+                </div>
+              </div>
+              <p className="mt-3 text-[#495057]">{note.content}</p>
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
-  </main>
-</div>
-
-
   );
 }
